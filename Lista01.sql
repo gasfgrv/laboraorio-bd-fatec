@@ -83,18 +83,18 @@ AND CodPred=43423;
 -- 8. Um professor pode ministrar turmas de disciplinas pertencentes a outros departamentos. Para cada professor que já 
 -- ministrou aulas em disciplinas de outros departamentos, obter o código do professor, seu nome, o nome de seu departamento e o
 -- nome do departamento no qual ministrou disciplina.
+
 SELECT Professor.CodProf, 
-NomeProf, 
-DeptoProf.NomeDepto AS DeptoProf, 
-DeptoDisc.NomeDepto AS DeptoDisc 
+Professor.NomeProf, 
+Depto.NomeDepto AS NomeDeptoProf, 
+Depto.NomeDepto AS NomeDeptoDisc 
 FROM Professor, 
 ProfTurma, 
-Depto AS DeptoProf, 
-Depto as DeptoDisc 
+Depto
 WHERE Professor.CodProf=ProfTurma.CodProf 
 AND Professor.CodDepto<>ProfTurma.CodDepto 
-AND Professor.CodDepto=DeptoProf.CodDepto 
-AND ProfTurma.CodDepto=DeptoDisc.CodDepto;
+AND Professor.CodDepto=Depto.CodDepto 
+AND ProfTurma.CodDepto=Depto.CodDepto;
 
 -- 9. Obter o nome dos professores que possuem horários conflitantes (possuem turmas que tenham a mesma hora inicial, no mesmo 
 -- dia da semana e no mesmo semestre). Além dos nomes, mostrar as chaves primárias das turmas em conflito.
