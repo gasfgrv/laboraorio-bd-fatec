@@ -1,6 +1,6 @@
 
--- Trigger para adicionar um sufixo ao inserir um novo departamento.
- CREATE OR REPLACE
+-- Trigger para adicionar um sufixo ao inserir um departamento
+CREATE OR REPLACE
 TRIGGER TG_SUFIXO BEFORE
 INSERT
 	ON
@@ -8,8 +8,9 @@ INSERT
 BEGIN
 	:NEW.NOMEDEPTO := :NEW.NOMEDEPTO || 'sons';
 END;
--- Triger para não permitir que haja um professor com a titulação de doutor.
- CREATE OR REPLACE
+
+-- Trigger para impedir que o insert ou update de um professor que seja doutor
+CREATE OR REPLACE
 TRIGGER TG_DOUTOR BEFORE
 INSERT
 	OR
@@ -21,8 +22,9 @@ BEGIN
 	'Titulação Inválida');
 END IF;
 END;
+
 -- Trigger de auditoria, pega o horario e o usuário logado após cada alteração.
- CREATE OR REPLACE
+CREATE OR REPLACE
 TRIGGER tg_historico AFTER
 UPDATE
 	ON
