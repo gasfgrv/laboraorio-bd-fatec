@@ -48,3 +48,35 @@ VALUES (:new.CODPROF,
 DATA_ATUALIZACAO,
 LOGIN_ATUAL);
 END;
+
+-- trigger para garantir integridade referencial
+CREATE OR REPLACE TRIGGER tg_fkprereq BEFORE
+    DELETE ON disciplina
+    FOR EACH ROW
+BEGIN
+    DELETE FROM prereq
+    WHERE
+        ( numdisc = :old.numdisc )
+        OR ( prereq.numdiscprereq = :old.numdisc );
+
+END;
+
+CREATE OR REPLACE TRIGGER tg_fkdisciplina BEFORE
+    INSERT OR UPDATE ON prereq
+    FOR EACH ROW
+DECLARE
+    linhas NUMBER;
+BEGIN
+    SELECT
+        numdisc
+    INTO linhas
+    FROM
+        disciplina
+    WHERE
+        numdisc = :new.numdisc
+        OR numdisc = :new.numdiscprereq;
+
+    IF linhas < 1 THEN
+        raise_application_error(-20000, 'INSERT ou UPDATE na tabela (prereq) viola a FK');
+    END IF;
+END;
