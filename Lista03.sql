@@ -4,62 +4,66 @@
 -- disciplina do departamento 'Informática' que tenha mais que três créditos.
 -- Resolver a questão da seguinte forma:
 -- a. sem consultas aninhadas e sem sintaxe explícita para junções,
- SELECT
-	PROFESSOR.NOMEPROF
+SELECT
+    professor.nomeprof
 FROM
-	disciplina NATURAL
-JOIN PROFESSOR NATURAL
-JOIN DEPTO NATURAL
-JOIN PROFTURMA NATURAL
-JOIN TITULACAO
+    disciplina
+    NATURAL JOIN professor
+    NATURAL JOIN depto
+    NATURAL JOIN profturma
+    NATURAL JOIN titulacao
 WHERE
-	NOMEDEPTO = 'Informática'
-	AND CREDITODISC > 3
-	AND CODTIT = 1
-	AND ANOSEM = 20022;
+    nomedepto = 'Informática'
+    AND creditodisc > 3
+    AND codtit = 1
+    AND anosem = 20022;
 -- b. usando SQL, em estilo de cálculo relacional, com consultas aninhadas
 -- (quando possível usar IN, caso contrário usar EXISTS).
- SELECT
-	DISTINCT NOMEPROF
+
+SELECT DISTINCT
+    nomeprof
 FROM
-	DEPTO,
-	PROFESSOR,
-	DISCIPLINA,
-	PROFTURMA
+    depto,
+    professor,
+    disciplina,
+    profturma
 WHERE
-	NOMEDEPTO = 'Informática'
-	AND CREDITODISC > 3
-	AND CODTIT = 1
-	AND ANOSEM = 20022;
+    nomedepto = 'Informática'
+    AND creditodisc > 3
+    AND codtit = 1
+    AND anosem = 20022;
 -- 2. Obter os nomes das disciplinas do departamento denominado 'Informática' que
 -- não foram oferecidas no semestre 20021.
 -- Resolver a questão da seguinte forma:
 -- a. no estilo de álgebra relacional, isto é, sem consultas aninhadas
 -- (subselects),
- SELECT
-	NOMEDISC
+
+SELECT
+    nomedisc
 FROM
-	DEPTO D NATURAL
-JOIN DISCIPLINA NATURAL
-JOIN TURMA
+    depto d
+    NATURAL JOIN disciplina
+    NATURAL JOIN turma
 WHERE
-	d.nomedepto = 'Informática'
-	AND ANOSEM = 20021;
+    d.nomedepto = 'Informática'
+    AND anosem = 20021;
 -- b. no estilo cálculo relacional, isto é, com consultas aninhadas (subselects).
- SELECT
-	NOMEDISC
+
+SELECT
+    nomedisc
 FROM
-	DEPTO D NATURAL
-JOIN DISCIPLINA
+    depto d
+    NATURAL JOIN disciplina
 WHERE
-	d.nomedepto = 'Informática'
-	AND CODDEPTO IN (
-	SELECT
-		CODDEPTO
-	FROM
-		TURMA
-	WHERE
-		anosem = 20021);
+    d.nomedepto = 'Informática'
+    AND coddepto IN (
+        SELECT
+            coddepto
+        FROM
+            turma
+        WHERE
+            anosem = 20021
+    );
 -- 3. Obter uma tabela com as seguintes colunas: código de departamento, nome do
 -- departamento, número de disciplina, créditos da disciplina, sigla da turma e
 -- capacidade da turma. A tabela deve conter cada departamento associado com
@@ -67,215 +71,243 @@ WHERE
 -- semestre 20022. Caso um departamento não tenha disciplinas, as demais colunas
 -- devem aparecer vazias. Caso uma disciplina não tenha turmas, as demais
 -- colunas deve aparecer vazias.
- SELECT
-	CODDEPTO,
-	NOMEDEPTO,
-	NUMDISC,
-	CREDITODISC,
-	SIGLATUR,
-	SIGLATUR
+
+SELECT
+    coddepto,
+    nomedepto,
+    numdisc,
+    creditodisc,
+    siglatur,
+    siglatur
 FROM
-	DEPTO NATURAL
-LEFT JOIN TURMA NATURAL
-LEFT JOIN DISCIPLINA;
+    depto
+    NATURAL LEFT JOIN turma
+    NATURAL LEFT JOIN disciplina;
 -- 4. Obter uma tabela com duas colunas, contendo o nome de cada disciplina
 -- seguido do nome de cada um de seus pré-requisitos. Disciplinas sem pré-
 -- requisito têm a segunda coluna vazia.
- SELECT
-	DISCIPLINA.NOMEDISC,
-	discReq.NOMEDISC
+
+SELECT
+    disciplina.nomedisc,
+    discreq.nomedisc
 FROM
-	DISCIPLINA
-LEFT JOIN PREREQ ON
-	DISCIPLINA.CODDEPTO = PREREQ.CODDEPTO
-	AND DISCIPLINA.NUMDISC = PREREQ.NUMDISC
-LEFT JOIN DISCIPLINA discReq ON
-	discReq.CODDEPTO = PREREQ.CODDEPTOPREREQ
-	AND discReq.NUMDISC = PREREQ.NUMDISCPREREQ
+    disciplina   left
+    JOIN prereq ON disciplina.coddepto = prereq.coddepto
+                   AND disciplina.numdisc = prereq.numdisc
+    LEFT JOIN disciplina   discreq ON discreq.coddepto = prereq.coddeptoprereq
+                                    AND discreq.numdisc = prereq.numdiscprereq;
 -- 5. Obter os identificadores de todas turmas de disciplinas do departamento
 -- denominado `Informática' que não têm aula na sala de número 102 do prédio de
 -- código 43421.
- SELECT
-	SIGLATUR
+
+SELECT
+    siglatur
 FROM
-	HORARIO NATURAL
-JOIN DEPTO
+    horario
+    NATURAL JOIN depto
 WHERE
-	NOMEDEPTO = 'Informática'
-	AND NOT NUMSALA = 102
-	AND CODPRED = 43421;
+    nomedepto = 'Informática'
+    AND NOT numsala = 102
+    AND codpred = 43421;
 -- 6. Obter o número de disciplinas do departamento denominado `Informática'.
- SELECT
-	COUNT(NOMEDISC)
+
+SELECT
+    COUNT(nomedisc)
 FROM
-	DISCIPLINA NATURAL
-JOIN DEPTO
+    disciplina
+    NATURAL JOIN depto
 WHERE
-	NOMEDEPTO = 'Informática';
+    nomedepto = 'Informática';
 -- 7. Obter o número de salas que foram usadas no ano-semestre 20021 por turmas do
 -- departamento denominado `Informática'.
- SELECT
-	COUNT(SIGLATUR)
+
+SELECT
+    COUNT(siglatur)
 FROM
-	HORARIO NATURAL
-JOIN DEPTO
+    horario
+    NATURAL JOIN depto
 WHERE
-	NOMEDEPTO = 'Informática'
-	AND ANOSEM = 20021;
+    nomedepto = 'Informática'
+    AND anosem = 20021;
 -- 8. Obter os nomes das disciplinas do departamento denominado `Informática' que
 -- têm o maior número de créditos dentre as disciplinas deste departamento.
- SELECT
-	NOMEDISC
+
+SELECT
+    nomedisc
 FROM
-	DISCIPLINA NATURAL
-JOIN DEPTO
+    disciplina
+    NATURAL JOIN depto
 WHERE
-	NOMEDEPTO = 'Informática'
-	AND CREDITODISC =(
-	SELECT
-		MAX(CREDITODISC)
-	FROM
-		DISCIPLINA) ;
+    nomedepto = 'Informática'
+    AND creditodisc = (
+        SELECT
+            MAX(creditodisc)
+        FROM
+            disciplina
+    );
 -- 9. Para cada departamento, obter seu nome e o número de disciplinas do
 -- departamento. Obter o resultado em ordem descendente de número de
 -- disciplinas.
- SELECT
-	DISTINCT NOMEDEPTO,
-	(
-	SELECT
-		COUNT(NOMEDISC)
-	FROM
-		DISCIPLINA
-	WHERE
-		DISCIPLINA.CODDEPTO = DEPTO.CODDEPTO) QtdeDisc
+
+SELECT DISTINCT
+    nomedepto,
+    (
+        SELECT
+            COUNT(nomedisc)
+        FROM
+            disciplina
+        WHERE
+            disciplina.coddepto = depto.coddepto
+    ) qtdedisc
 FROM
-	DEPTO
+    depto
 ORDER BY
-	QtdeDisc DESC;
+    qtdedisc DESC;
 -- 10. Para cada departamento, obter seu nome e os créditos totais oferecidos no ano-
 -- semestre 20022. O número de créditos oferecidos é calculado através do produto
 -- de número de créditos da disciplina pelo número de turmas oferecidas no
 -- semestre.
- SELECT
-	DISTINCT NOMEDEPTO,
-	((
-	SELECT
-		DISTINCT CREDITODISC
-	FROM
-		DISCIPLINA
-	WHERE
-		DISCIPLINA.CODDEPTO = DEPTO.CODDEPTO) * (
-	SELECT
-		COUNT(SIGLATUR)
-	FROM
-		HORARIO
-	WHERE
-		HORARIO.CODDEPTO = DEPTO.CODDEPTO)) AS QTDEDISC
+
+SELECT DISTINCT
+    nomedepto,
+    ( (
+        SELECT DISTINCT
+            creditodisc
+        FROM
+            disciplina
+        WHERE
+            disciplina.coddepto = depto.coddepto
+    ) * (
+        SELECT
+            COUNT(siglatur)
+        FROM
+            horario
+        WHERE
+            horario.coddepto = depto.coddepto
+    ) ) AS qtdedisc
 FROM
-	DEPTO
+    depto
+GROUP BY
+    nomedepto
 ORDER BY
-	QtdeDisc DESC;
+    qtdedisc DESC;
 -- 11. Resolver a consulta da questão anterior, mas incluindo somente os
 -- departamentos que têm mais que 5 disciplinas.
- SELECT
-	DISTINCT NOMEDEPTO,
-	((
-	SELECT
-		DISTINCT CREDITODISC
-	FROM
-		DISCIPLINA
-	WHERE
-		DISCIPLINA.CODDEPTO = DEPTO.CODDEPTO) * (
-	SELECT
-		COUNT(SIGLATUR)
-	FROM
-		HORARIO
-	WHERE
-		HORARIO.CODDEPTO = DEPTO.CODDEPTO)) AS QTDEDISC
+
+SELECT DISTINCT
+    nomedepto,
+    ( (
+        SELECT DISTINCT
+            creditodisc
+        FROM
+            disciplina
+        WHERE
+            disciplina.coddepto = depto.coddepto
+    ) * (
+        SELECT
+            COUNT(siglatur)
+        FROM
+            horario
+        WHERE
+            horario.coddepto = depto.coddepto
+    ) ) AS qtdedisc
 FROM
-	DEPTO
+    depto
 WHERE
-	(
-	SELECT
-		COUNT(NOMEDISC)
-	FROM
-		DISCIPLINA
-	WHERE
-		DISCIPLINA.CODDEPTO = DEPTO.CODDEPTO) > 5
+    (
+        SELECT
+            COUNT(nomedisc)
+        FROM
+            disciplina
+        WHERE
+            disciplina.coddepto = depto.coddepto
+    ) > 5
+GROUP BY
+    nomedepto
 ORDER BY
-	QtdeDisc DESC;
+    qtdedisc DESC;
 -- 12. Obter os nomes dos departamentos que possuem a maior soma de créditos.
- SELECT
-	*
+
+SELECT
+    nomedepto      nomedepto,
+    somacreditos   somacreditos
 FROM
-	(
-	SELECT
-		NOMEDEPTO,
-		(
-		SELECT
-			SUM(CREDITODISC)
-		FROM
-			DISCIPLINA
-		WHERE
-			DISCIPLINA.CODDEPTO = DEPTO.CODDEPTO) somaCreditos
-	FROM
-		DEPTO) tbl
+    (
+        SELECT
+            nomedepto,
+            (
+                SELECT
+                    SUM(creditodisc)
+                FROM
+                    disciplina
+                WHERE
+                    disciplina.coddepto = depto.coddepto
+            ) somacreditos
+        FROM
+            depto
+    ) tbl
 WHERE
-	tbl.somaCreditos >= (
-	SELECT
-		MAX(SUM(CREDITODISC))
-	FROM
-		DISCIPLINA NATURAL
-	JOIN DEPTO
-	GROUP BY
-		CODDEPTO);
+    tbl.somacreditos >= (
+        SELECT
+            MAX(SUM(creditodisc))
+        FROM
+            disciplina
+            NATURAL JOIN depto
+        GROUP BY
+            coddepto
+    );
 -- 13. Obter os nomes das disciplinas que em 20022, têm pelo menos uma turma cuja
 -- total de horas seja diferente do número de créditos da disciplina.
 -- Resolver a questão da seguinte forma:
 -- 1. sem usar GROUP BY, com consultas aninhadas (subselects),
- SELECT
-	NOMEDISC
+
+SELECT
+    nomedisc
 FROM
-	DISCIPLINA
+    disciplina
 WHERE
-	NOMEDISC = (
-	SELECT
-		NOMEDISC
-	FROM
-		HORARIO,
-		DISCIPLINA
-	WHERE
-		HORARIO.NUMDISC = DISCIPLINA.NUMDISC
-		AND DISCIPLINA.CREDITODISC <> HORARIO.NUMHORAS);
+    nomedisc = (
+        SELECT
+            nomedisc
+        FROM
+            horario,
+            disciplina
+        WHERE
+            horario.numdisc = disciplina.numdisc
+            AND disciplina.creditodisc <> horario.numhoras
+    );
 -- 2. usando GROUP BY, sem consultas aninhadas.
- SELECT
-	NOMEDISC
+
+SELECT
+    nomedisc
 FROM
-	HORARIO NATURAL
-JOIN DISCIPLINA
+    horario
+    NATURAL JOIN disciplina
 WHERE
-	DISCIPLINA.CREDITODISC <> HORARIO.NUMHORAS;
+    disciplina.creditodisc <> horario.numhoras;
 -- 14. Obter os nomes dos professores que, em 20022, deram aula em mais de uma
 -- turma.
 -- Resolver a questão da seguinte forma:
 -- 1. sem funções de agregação (tipo COUNT, MIN,MAX,AVG,SUM),
- SELECT
-	DISTINCT NOMEPROF
+
+SELECT DISTINCT
+    nomeprof
 FROM
-	PROFTURMA,
-	PROFESSOR
+    profturma,
+    professor
 WHERE
-	ANOSEM = 20022
+    anosem = 20022
 ORDER BY
-	NOMEPROF ASC
+    nomeprof ASC;
 -- 2. ou ainda, com funções de agregação.
- SELECT
-	DISTINCT NOMEPROF,
-	COUNT(SIGLATUR)
+
+SELECT DISTINCT
+    nomeprof,
+    COUNT(siglatur)
 FROM
-	PROFTURMA,
-	PROFESSOR
+    profturma,
+    professor
 WHERE
-	ANOSEM = 20022
+    anosem = 20022
 GROUP BY
-	NOMEPROF;
+    nomeprof;
