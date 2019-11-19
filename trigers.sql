@@ -45,12 +45,18 @@ END;
 CREATE OR REPLACE TRIGGER tg_fkprereq BEFORE
     DELETE ON disciplina
     FOR EACH ROW
+DECLARE
+    linhas NUMBER;
 BEGIN
-    DELETE FROM prereq
+    SELECT COUNT(numdisc)
+    INTO linhas 
+    FROM prereq
     WHERE
         ( numdisc = :old.numdisc )
-        OR ( prereq.numdiscprereq = :old.numdisc );
-
+        OR ( numdiscprereq = :old.numdisc );
+    IF linhas > 0 THEN
+        raise_application_error(-20000, 'DELETE na tabela [disciplina] viola a FK pois ha registros em prereq');
+    END IF;
 END;
 
 CREATE OR REPLACE TRIGGER tg_fkdisciplina BEFORE
@@ -60,15 +66,15 @@ DECLARE
     linhas NUMBER;
 BEGIN
     SELECT
-        numdisc
+        count(numdisc)
     INTO linhas
     FROM
         disciplina
     WHERE
         numdisc = :new.numdisc
         OR numdisc = :new.numdiscprereq;
-
-    IF linhas < 1 THEN
+        
+    IF linhas < 2 THEN
         raise_application_error(-20000, 'INSERT ou UPDATE na tabela (prereq) viola a FK');
     END IF;
 END;
