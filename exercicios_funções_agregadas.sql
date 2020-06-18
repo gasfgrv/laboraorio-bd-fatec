@@ -1,15 +1,52 @@
-SELECT Count(CodFornec) from fornecedor;
+SELECT
+	Count(CodFornec)
+FROM
+	fornecedor;
 
-SELECT Count(distinct CidadeFornec) from fornecedor;
+SELECT
+	Count(DISTINCT CidadeFornec)
+FROM
+	fornecedor;
 
-SELECT cidadeFornec, Count(CodFornec) from fornecedor group by CidadeFornec;
+SELECT
+	cidadeFornec,
+	Count(CodFornec)
+FROM
+	fornecedor
+GROUP BY
+	CidadeFornec;
 
-SELECT MAX(QTDEEMBARC) from embarq;
+SELECT
+	MAX(QTDEEMBARC)
+FROM
+	embarq;
 
-SELECT CodFornec, Count(QTDEEMBARC) from embarq group by CodFornec;
+SELECT
+	CodFornec,
+	Count(QTDEEMBARC)
+FROM
+	embarq
+GROUP BY
+	CodFornec;
 
-SELECT CodFornec, SUM(QTDEEMBARC) FROM embarq GROUP BY CodFornec HAVING SUM(QTDEEMBARC) > 300;
+SELECT
+	CodFornec,
+	SUM(QTDEEMBARC)
+FROM
+	embarq
+GROUP BY
+	CodFornec
+HAVING
+	SUM(QTDEEMBARC) > 300;
 
-SELECT CodFornec, Sum(QTDEEMBARC) from embarq a inner join peca b on a.codpeca = b.codpeca where b.corpeca = 'Cinza' group by CodFornec;
-
-
+SELECT
+	CodFornec,
+	Sum(QTDEEMBARC)
+FROM
+	embarq a
+INNER JOIN peca b ON
+	a.codpeca = b.codpeca
+WHERE
+	b.corpeca = 'Cinza'
+GROUP BY
+	CodFornec;
