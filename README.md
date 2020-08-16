@@ -805,17 +805,22 @@ END;
 
 #### 1.1.3.5. Joins
 
+<div align="center">
+
+<img width="75%" height="75%" src="https://fabiobmed.com.br/wp-content/uploads/2013/04/sqljoins2.png">
+
+</div>
+
 - **Inner join**:
-- Uma Junção Interna é caracterizada por uma seleção que retorna apenas os dados que atendem às condições de junção, isto é, quais linhas de uma tabela se relacionam com as linhas de outras tabelas. Para isto utilizamos a cláusula ON, que é semelhante à cláusula WHERE.
-- Podemos especificar duas formas diferentes de expressar esta junção: a explícita utiliza a palavra JOIN, enquanto a implícita utiliza ',' para separar as tabelas a combinar na cláusula FROM do SELECT. Então sempre é gerado o produto cruzado do qual são selecionadas as combinações que cumpram a cláusula WHERE.
+  - Uma Junção Interna é caracterizada por uma seleção que retorna apenas os dados que atendem às condições de junção, isto é, quais linhas de uma tabela se relacionam com as linhas de outras tabelas. Para isto utilizamos a cláusula ON, que é semelhante à cláusula WHERE. Podemos especificar duas formas diferentes de expressar esta junção: a explícita utiliza a palavra JOIN, enquanto a implícita utiliza ',' para separar as tabelas a combinar na cláusula FROM do SELECT. Então sempre é gerado o produto cruzado do qual são selecionadas as combinações que cumpram a cláusula WHERE.
 - **Outer join**
   - Left Outer Join: O resultado desta seleção sempre contém todos os registros da tabela esquerda (isto é, a primeira tabela mencionada na consulta), mesmo quando não exista registros correspondentes na tabela direita. Desta forma, esta seleção retorna todos os valores da tabela esquerda com os valores da tabela direita correspondente, ou quando não há correspondência retorna um valor NULL.
   - Right Outer Join: Esta operação apresenta todos os dados das tabelas à esquerda e à direita, mesmo que não possuam correspondência em outra tabela. A tabela combinada possuirá assim todos os registros de ambas as tabelas e apresentará valores nulos para os registros sem correspondência.
 - **Self join**
-- Bem, um SELF JOIN nada mais é que um JOIN na mesma tabela, relacionando colunas diferentes claro. Então é necessário que a tabela tenha pelo menos duas colunas, onda faremos uma coluna se relacionar com a outra. Isto acontece poucas vezes na prática, mas é muito bom com dados hierárquicos, onde podemos fazer uma árvore genealógica, ou como no exemplo mais abaixo podemos relacionar um empregado com o seu gerente que também é um empregado e existe na mesma tabela.
+  - Bem, um SELF JOIN nada mais é que um JOIN na mesma tabela, relacionando colunas diferentes claro. Então é necessário que a tabela tenha pelo menos duas colunas, onda faremos uma coluna se relacionar com a outra. Isto acontece poucas vezes na prática, mas é muito bom com dados hierárquicos, onde podemos fazer uma árvore genealógica, ou como no exemplo mais abaixo podemos relacionar um empregado com o seu gerente que também é um empregado e existe na mesma tabela.
 - **Cross Join**
-- Quando queremos juntar duas ou mais tabelas por cruzamento.
+  - Quando queremos juntar duas ou mais tabelas por cruzamento.
 - **Natural join**
-- Cria um INNER ou OUTTER join entre as duas tabelas, sem definição EXPLICITA do critério de junção, pois, automaticamente, se utiliza dos campos que as duas tabelas tem em comum para criar a junçao (Utiliza as chaves estrangeiras que interligam as duas tabelas).
+  - Cria um INNER ou OUTTER join entre as duas tabelas, sem definição EXPLICITA do critério de junção, pois, automaticamente, se utiliza dos campos que as duas tabelas tem em comum para criar a junçao (Utiliza as chaves estrangeiras que interligam as duas tabelas).
 - **Theta e equi join**
-- Muitos consideram ambos EQUI JOIN e Theta JOIN semelhantes a INNER, OUTER etc JOINs. Mas eu acredito fortemente que é um erro e faz o ideias vagas. Porque INNER JOIN, OUTER JOIN etc estão todos conectados com as tabelas e seus dados, enquanto EQUI JOIN e THETA JOIN são apenas conectado com os operadores que usamos no primeiro.
+  - Muitos consideram ambos EQUI JOIN e Theta JOIN semelhantes a INNER, OUTER etc JOINs. Mas eu acredito fortemente que é um erro e faz o ideias vagas. Porque INNER JOIN, OUTER JOIN etc estão todos conectados com as tabelas e seus dados, enquanto EQUI JOIN e THETA JOIN são apenas conectado com os operadores que usamos no primeiro.
