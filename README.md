@@ -1,60 +1,22 @@
-# 1. Laboratório de Banco de Dados
+# Laboratório de Banco de Dados - Resumo PL/SQL
 
-- [1. Laboratório de Banco de Dados](#1-laboratório-de-banco-de-dados)
-  - [1.1. Resumo PL/SQL](#11-resumo-plsql)
-    - [1.1.1. Estruturas de Controle](#111-estruturas-de-controle)
-      - [1.1.1.1. Exemplos de Estruturas de controle](#1111-exemplos-de-estruturas-de-controle)
-        - [1.1.1.1.1. IF-THEN](#11111-if-then)
-        - [1.1.1.1.2. IF-THEN-ELSE](#11112-if-then-else)
-        - [1.1.1.1.3. IF-THEN-ELSIF](#11113-if-then-elsif)
-        - [1.1.1.1.4. IF Aninhados](#11114-if-aninhados)
-        - [1.1.1.1.5. CASE](#11115-case)
-        - [1.1.1.1.6. CASE searched](#11116-case-searched)
-        - [1.1.1.1.7. CASE com exceptions](#11117-case-com-exceptions)
-        - [1.1.1.1.8. LOOP](#11118-loop)
-        - [1.1.1.1.9. LOOP com EXIT WHEN](#11119-loop-com-exit-when)
-        - [1.1.1.1.10. LOOPs aninhados](#111110-loops-aninhados)
-        - [1.1.1.1.11. Loops aninhados com cláusulas EXIT WHEN](#111111-loops-aninhados-com-cláusulas-exit-when)
-        - [1.1.1.1.12. Loop básico com cláusula CONTINUE](#111112-loop-básico-com-cláusula-continue)
-        - [1.1.1.1.13. Cláusula CONTINUE com a utilização da cláusula CONTINUE WHEN](#111113-cláusula-continue-com-a-utilização-da-cláusula-continue-when)
-    - [1.1.2. Funções agregadas](#112-funções-agregadas)
-      - [1.1.2.1. Exemplos de funções agregadas](#1121-exemplos-de-funções-agregadas)
-    - [1.1.3. Functions, Procedures e Cursores](#113-functions-procedures-e-cursores)
-      - [1.1.3.1. Functions](#1131-functions)
-        - [1.1.3.1.1. Exemplos de funções](#11311-exemplos-de-funções)
-          - [1.1.3.1.1.1. Criação de uma função](#113111-criação-de-uma-função)
-          - [1.1.3.1.1.2. valor máximo entre dois números inteiros](#113112-valor-máximo-entre-dois-números-inteiros)
-          - [1.1.3.1.1.3. função recursiva para calcular o fatorial de um número](#113113-função-recursiva-para-calcular-o-fatorial-de-um-número)
-      - [1.1.3.2. Procedures](#1132-procedures)
-        - [1.1.3.2.1. Exemplos de procedures](#11321-exemplos-de-procedures)
-          - [1.1.3.2.1.1. Criação de uma procedure](#113211-criação-de-uma-procedure)
-          - [1.1.3.2.1.2. procedure para retornar o número mínimo utilizando o IN OUT](#113212-procedure-para-retornar-o-número-mínimo-utilizando-o-in-out)
-      - [1.1.3.3. Cursores](#1133-cursores)
-        - [1.1.3.3.1. Exemplos de cursores](#11331-exemplos-de-cursores)
-          - [1.1.3.3.1.1. Criação de um cursor](#113311-criação-de-um-cursor)
-          - [1.1.3.3.1.2. Cursor com loop simples](#113312-cursor-com-loop-simples)
-          - [1.1.3.3.1.3. Cursores com while loop](#113313-cursores-com-while-loop)
-          - [1.1.3.3.1.4. cursor com loop for](#113314-cursor-com-loop-for)
-          - [1.1.3.3.1.5. Cursor com for implicito](#113315-cursor-com-for-implicito)
-          - [1.1.3.3.1.6. cursor implicito](#113316-cursor-implicito)
-      - [1.1.3.4. Propriedades de transação (ACID)](#1134-propriedades-de-transação-acid)
-      - [1.1.3.5. Joins](#1135-joins)
+## Estruturas de Controle
 
-## 1.1. Resumo PL/SQL
+Os controles de declarações são realizados em três categorias, as quais são a de declarações condicionais de seleção, declarações em loop (repetitivas) e as declarações de controle em sequência.
 
-### 1.1.1. Estruturas de Controle
+Quando trabalhamos com as instruções IF no Oracle, estas são utilizadas para a execução de código para quando uma condição for satisfeita, ou seja, quando esta for verdadeira, em caso de apresentar um resultado diferente, ela executará uma outra estrutura de código. Os IF’s são executados em uma dada sequência de instruções, onde temos três formas de apresentação desta instrução: IF-THEN, IF-THEN-ELSE e IF-THEN-ELSEIF.
 
-- Os controles de declarações são realizados em três categorias, as quais são a de declarações condicionais de seleção, declarações em loop (repetitivas) e as declarações de controle em sequência.
-- Quando trabalhamos com as instruções IF no Oracle, estas são utilizadas para a execução de código para quando uma condição for satisfeita, ou seja, quando esta for verdadeira, em caso de apresentar um resultado diferente, ela executará uma outra estrutura de código. Os IF’s são executados em uma dada sequência de instruções, onde temos três formas de apresentação desta instrução: IF-THEN, IF-THEN-ELSE e IF-THEN-ELSEIF.
-- A instrução CASE é uma forma mais compacta para realizar a avaliação de uma única condição e escolher entre algumas ações alternativas. No caso de termos mais de dois IF’s, de certa forma, passa a ser mais aplicável a utilização de CASES. Para que possamos entender melhor com relação a estrutura do CASE.
-- No PL/SQL temos também o recurso CASE Searched, o qual é bastante semelhante às instruções simples do CASE, com a diferença de que nesta forma o CASE não possui parâmetros de entrada e em suas cláusulas WHEN temos condições de pesquisa que retornam valores booleanos ao invés de expressões que podem ter valores de qualquer tipo.
-- A partir desse momento estaremos trabalhando com os Loops no Oracle, que nada mais são que estruturas de repetição. No Oracle podemos utilizar os Loops para rodar as mesmas estruturas de formas diferentes com diferentes valores. Os loops realizam a execução de sequências de instruções até alcançar o objetivo. As estruturas de Loop no Oracle são o Loop Básico, For Loop, Cursos Loop e o While Loop.
-- Quando utilizamos a declaração EXIT WHEN, ela sai da iteração atual do ciclo quando a condição da cláusula WHEN é verdadeira, no caso TRUE. Ocorrendo essa validação, o controle é transferido para o fim do loop.
-- Quando utilizamos a declaração CONTINUE WHEN, ela sai da iteração atual do ciclo quando a condição em sua cláusula WHEN é apresentada como TRUE, e em seguida, transfere o controle para a próxima iteração do loop.
+A instrução CASE é uma forma mais compacta para realizar a avaliação de uma única condição e escolher entre algumas ações alternativas. No caso de termos mais de dois IF’s, de certa forma, passa a ser mais aplicável a utilização de CASES. Para que possamos entender melhor com relação a estrutura do CASE.
+No PL/SQL temos também o recurso CASE Searched, o qual é bastante semelhante às instruções simples do CASE, com a diferença de que nesta forma o CASE não possui parâmetros de entrada e em suas cláusulas WHEN temos condições de pesquisa que retornam valores booleanos ao invés de expressões que podem ter valores de qualquer tipo.
 
-#### 1.1.1.1. Exemplos de Estruturas de controle
+A partir desse momento estaremos trabalhando com os Loops no Oracle, que nada mais são que estruturas de repetição. No Oracle podemos utilizar os Loops para rodar as mesmas estruturas de formas diferentes com diferentes valores. Os loops realizam a execução de sequências de instruções até alcançar o objetivo. As estruturas de Loop no Oracle são o Loop Básico, For Loop, Cursos Loop e o While Loop.
+Quando utilizamos a declaração EXIT WHEN, ela sai da iteração atual do ciclo quando a condição da cláusula WHEN é verdadeira, no caso TRUE. Ocorrendo essa validação, o controle é transferido para o fim do loop.
 
-##### 1.1.1.1.1. IF-THEN
+Quando utilizamos a declaração CONTINUE WHEN, ela sai da iteração atual do ciclo quando a condição em sua cláusula WHEN é apresentada como TRUE, e em seguida, transfere o controle para a próxima iteração do loop.
+
+### Exemplos de Estruturas de controle
+
+**IF-THEN**
 
 ```sql
 DECLARE
@@ -73,7 +35,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.2. IF-THEN-ELSE
+**IF-THEN-ELSE**
 
 ```sql
 DECLARE
@@ -94,7 +56,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.3. IF-THEN-ELSIF
+**IF-THEN-ELSIF**
 
 ```sql
 DECLARE
@@ -116,7 +78,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.4. IF Aninhados
+**IF aninhados**
 
 ```sql
 DECLARE
@@ -141,7 +103,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.5. CASE
+**CASE**
 
 ```sql
 DECLARE
@@ -166,7 +128,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.6. CASE searched
+**CASE searched**
 
 ```sql
 CASE searched
@@ -190,7 +152,7 @@ CASE searched
   END;
 ```
 
-##### 1.1.1.1.7. CASE com exceptions
+**CASE com exceptions**
 
 ```sql
 DECLARE
@@ -216,7 +178,7 @@ EXCEPTION
 END;
 ```
 
-##### 1.1.1.1.8. LOOP
+**LOOP**
 
 ```sql
 DECLARE
@@ -238,7 +200,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.9. LOOP com EXIT WHEN
+**LOOP com EXIT WHEN**
 
 ```sql
 DECLARE
@@ -258,7 +220,7 @@ dbms_output.Put_line('Após o último registro do loop verificado, temos o valor
 END;
 ```
 
-##### 1.1.1.1.10. LOOPs aninhados
+**LOOPs aninhados**
 
 ```sql
 DECLARE
@@ -289,7 +251,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.11. Loops aninhados com cláusulas EXIT WHEN
+**Loops aninhados com cláusulas EXIT WHEN**
 
 ```sql
 DECLARE
@@ -320,7 +282,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.12. Loop básico com cláusula CONTINUE
+**Loop básico com cláusula CONTINUE**
 
 ```sql
 DECLARE
@@ -343,7 +305,7 @@ BEGIN
 END;
 ```
 
-##### 1.1.1.1.13. Cláusula CONTINUE com a utilização da cláusula CONTINUE WHEN
+**Cláusula CONTINUE com a utilização da cláusula CONTINUE WHEN**
 
 ```sql
 DECLARE
@@ -364,8 +326,9 @@ BEGIN
   || To_char(valor));
 END;
 ```
+---
 
-### 1.1.2. Funções agregadas
+## Funções agregadas
 
 - **MAX:** A função MAX analisa um conjunto de valores e retorna o maior entre eles.
 - **MIN:** MIN analisa um grupo de valores e retorna o menor entre eles.
@@ -376,7 +339,7 @@ END;
 - **HAVING:** Podemos usar a cláusula HAVING em conjunto com GROUP BY para filtrar os resultado que serão submetidos a agregação.
 - **ALIAS:** A fim de facilitar a compreensão do SQL, podemos utilizar a palavra-chave as para criar um apelido para uma coluna.
 
-#### 1.1.2.1. Exemplos de funções agregadas
+### Exemplos de funções agregadas
 
 ```sql
 SELECT Count(codfornec)
@@ -412,35 +375,37 @@ FROM   embarq a
 WHERE  b.corpeca = 'Cinza'
 GROUP  BY codfornec;
 ```
+--- 
 
-### 1.1.3. Functions, Procedures e Cursores
+## Functions, Procedures e Cursores
 
-#### 1.1.3.1. Functions
+### Functions
 
-- Uma function é um bloco PL/SQL muito semelhante a uma procedure. O que podemos entender de início entre esses dois tipos de blocos é que os blocos functions retornam valores e as procedures podem ou não retornar um valor. As functions tem duas características que diferem das procedures, as quais não podemos deixar de tratar:
+Uma function é um bloco PL/SQL muito semelhante a uma procedure. O que podemos entender de início entre esses dois tipos de blocos é que os blocos functions retornam valores e as procedures podem ou não retornar um valor. As functions tem duas características que diferem das procedures, as quais não podemos deixar de tratar:
   - As functions sempre retornam valores
   - Functions são usadas como parte de uma expressão.
-- Podemos executar a função de várias formas. No caso da função retornar um valor, podemos declará-lo como uma variável, como da seguinte forma:
 
-  ```sql
-      func_nome :=  primeiro_nome_func;
-  ```
+Podemos executar a função de várias formas. No caso da função retornar um valor, podemos declará-lo como uma variável, como da seguinte forma:
 
-- Ou então como parte de uma instrução select:
+```sql
+func_nome :=  primeiro_nome_func;
+```
 
-  ```sql
-      SELECT primeiro_nome_func FROM dual;
-  ```
+Ou então como parte de uma instrução select:
 
-- Ou também como uma instrução PL/SQL:
+```sql
+SELECT primeiro_nome_func FROM dual;
+```
 
-  ```sql
-      dbms_output.put_line(primeiro_nome_func);
-  ```
+Ou também como uma instrução PL/SQL:
 
-##### 1.1.3.1.1. Exemplos de funções
+```sql
+dbms_output.put_line(primeiro_nome_func);
+```
 
-###### 1.1.3.1.1.1. Criação de uma função
+### Exemplos de funções
+
+**Criação de uma função**
 
 ```sql
 CREATE OR replace FUNCTION primeiro_nome_func
@@ -457,7 +422,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.1.1.2. valor máximo entre dois números inteiros
+**Valor máximo entre dois números inteiros**
 
 ```sql
 SET serveroutput ON;
@@ -496,7 +461,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.1.1.3. função recursiva para calcular o fatorial de um número
+**Função recursiva para calcular o fatorial de um número**
 
 ```sql
 DECLARE
@@ -528,38 +493,40 @@ BEGIN
 END;
 ```
 
-#### 1.1.3.2. Procedures
+### Procedures
 
-- Uma stored procedure é um bloco de instruções PL/SQL que executa uma ou mais tarefas específicas. Elas são bem similares com as procedures de outras linguagens de programação.
-- Podemos passar os parâmetros para uma procedure de três maneiras:
+Uma stored procedure é um bloco de instruções PL/SQL que executa uma ou mais tarefas específicas. Elas são bem similares com as procedures de outras linguagens de programação.
+
+Podemos passar os parâmetros para uma procedure de três maneiras:
   - **Parâmetros IN** – passamos o valor na própria procedure.
   - **Parâmetros OUT** – recebemos o valor a partir da chamada de blocos externos.
   - **Parâmetros IN OUT** – passamos um valor inicial para a procedure e recebemos de volta uma atualização.
-- Como executamos uma strored procedure? Para este ponto, a resposta é bem simples, pois temos duas maneiras de chamar uma stored procedure:
 
-  - Usando a palavra-chave EXECUTE;
+Como executamos uma strored procedure? Para este ponto, a resposta é bem simples, pois temos duas maneiras de chamar uma stored procedure:
 
-    ```sql
-        EXECUTE detalhes_dos_funcionarios;
-    ```
+- Usando a palavra-chave EXECUTE;
 
-  - Chamando o nome da procedure de um bloco PL/SQL.
+```sql
+EXECUTE detalhes_dos_funcionarios;
+```
 
-    ```sql
-        BEGIN
-        detalhes_dos_funcionarios
-        END;
-    ```
+- Chamando o nome da procedure de um bloco PL/SQL.
 
-- Para deletarmos uma procedute, utilizamos a instrução DROP PROCEDURE. Vejamos a seguir a sintaxe para a exclusão:
+```sql
+BEGIN
+detalhes_dos_funcionarios
+END;
+```
 
-  ```sql
-  DROP PROCEDURE nome_da_procedure;
-  ```
+Para deletarmos uma procedute, utilizamos a instrução DROP PROCEDURE. Vejamos a seguir a sintaxe para a exclusão:
 
-##### 1.1.3.2.1. Exemplos de procedures
+```sql
+DROP PROCEDURE nome_da_procedure;
+```
 
-###### 1.1.3.2.1.1. Criação de uma procedure
+### Exemplos de procedures
+
+**Criação de uma procedure**
 
 ```sql
 CREATE OR replace PROCEDURE Detalhes_dos_funcionarios
@@ -582,7 +549,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.2.1.2. procedure para retornar o número mínimo utilizando o IN OUT
+**Procedure para retornar o número mínimo utilizando o IN OUT**
 
 ```sql
 DECLARE
@@ -616,19 +583,29 @@ BEGIN
 END;
 ```
 
-#### 1.1.3.3. Cursores
+### Cursores
 
-- Cursores são áreas compostas de linhas e colunas armazenadas em memória que servem para armazenar o resultado de uma seleção que retorna nenhuma, uma ou diversas linhas.
-- Com o uso de cursores é possível selecionar um conjunto de linhas e manipular o resultado desta consulta linha a linha, dentro de um código PL/SQL (Program Language SQL), como stored procedures, triggers e código escritos dentro de ferramentas Oracle como o Developer, Designer ou Discoverer.
-- Os cursores em PL/SQL podem ser explícitos e implícitos. O PL/SQL declara um cursor implicitamente para toda instrução DML (UPDATE, INSERT, DELETE, SELECT...INTO), incluindo consultas que retornam apenas uma linha. As consultas que retornam mais de uma linha deverão ser declaradas explicitamente.
-- Cursores explícitos são indicados quando é necessário um controle no processamento do mesmo.
-- Quando declaramos um cursor é associado a ele um nome e a consulta SQL que será processada por este cursor. Assim como as variáveis, os cursores devem ser declarados na seção DECLARE.
-- O comando OPEN abre o cursor, executa a consulta associada a ele e gera o conjunto ativo, que consiste de todas as linhas que atendem os critérios de pesquisa da consulta associada ao cursor. Para gerenciar o conjunto ativo existe um ponteiro que registra qual linha está passível do comando FETCH. Após o OPEN o FETCH atuará sobre a primeira linha do conjunto ativo.
-- Extair os dados do cursor é o evento onde os dados da linha atual do conjunto ativo são copiados para variáveis ou registros e a cada FETCH realizado, o ponteiro passará a apontar para a linha seguinte do conjunto ativo.
-- O comando CLOSE desativa o cursor e libera o conjunto ativo. Esta etapa permite que o cursor seja reaberto, se necessário, para gerar um outro conjunto ativo.
-- Neste primeiro estilo de loop de busca, a sintaxe de loop simples é utilizada para processamento do cursor. Atributos explícitos de cursor são utilizados para controlar o número de vezes que o loop é executado.
-- Existem os cursor implícitos que são criados para processar as instruções INSERT, UPDATE, DELETE, SELECT...INTO e são manipulados a revelia do programador.
-- Atributos do Cursor.
+Cursores são áreas compostas de linhas e colunas armazenadas em memória que servem para armazenar o resultado de uma seleção que retorna nenhuma, uma ou diversas linhas.
+
+Com o uso de cursores é possível selecionar um conjunto de linhas e manipular o resultado desta consulta linha a linha, dentro de um código PL/SQL (Program Language SQL), como stored procedures, triggers e código escritos dentro de ferramentas Oracle como o Developer, Designer ou Discoverer.
+
+Os cursores em PL/SQL podem ser explícitos e implícitos. O PL/SQL declara um cursor implicitamente para toda instrução DML (UPDATE, INSERT, DELETE, SELECT...INTO), incluindo consultas que retornam apenas uma linha. As consultas que retornam mais de uma linha deverão ser declaradas explicitamente.
+
+Cursores explícitos são indicados quando é necessário um controle no processamento do mesmo.
+
+Quando declaramos um cursor é associado a ele um nome e a consulta SQL que será processada por este cursor. Assim como as variáveis, os cursores devem ser declarados na seção DECLARE.
+
+O comando OPEN abre o cursor, executa a consulta associada a ele e gera o conjunto ativo, que consiste de todas as linhas que atendem os critérios de pesquisa da consulta associada ao cursor. Para gerenciar o conjunto ativo existe um ponteiro que registra qual linha está passível do comando FETCH. Após o OPEN o FETCH atuará sobre a primeira linha do conjunto ativo.
+
+Extair os dados do cursor é o evento onde os dados da linha atual do conjunto ativo são copiados para variáveis ou registros e a cada FETCH realizado, o ponteiro passará a apontar para a linha seguinte do conjunto ativo.
+
+O comando CLOSE desativa o cursor e libera o conjunto ativo. Esta etapa permite que o cursor seja reaberto, se necessário, para gerar um outro conjunto ativo.
+
+Neste primeiro estilo de loop de busca, a sintaxe de loop simples é utilizada para processamento do cursor. Atributos explícitos de cursor são utilizados para controlar o número de vezes que o loop é executado.
+
+Existem os cursor implícitos que são criados para processar as instruções INSERT, UPDATE, DELETE, SELECT...INTO e são manipulados a revelia do programador.
+
+**Atributos do Cursor.**
 
 | **Atributo** | **Tipo** | **Descrição**                                                          |
 | ------------ | -------- | ---------------------------------------------------------------------- |
@@ -637,9 +614,9 @@ END;
 | %FOUND       | Booleano | Será avaliado para TRUE se a extração mais recente retornar linha.     |
 | %ROWCOUNT    | Numérico | Será avaliado para o número total de linhas retornadas até o momento.  |
 
-##### 1.1.3.3.1. Exemplos de cursores
+### Exemplos de cursores
 
-###### 1.1.3.3.1.1. Criação de um cursor
+**Criação de um cursor**
 
 ```sql
 DECLARE
@@ -702,7 +679,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.3.1.2. Cursor com loop simples
+**Cursor com loop simples**
 
 ```sql  
   DECLARE
@@ -725,7 +702,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.3.1.3. Cursores com while loop
+**Cursores com while loop**
 
 ```sql
 DECLARE
@@ -750,7 +727,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.3.1.4. cursor com loop for
+**Cursor com loop for**
 
 ```sql
 DECLARE
@@ -767,7 +744,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.3.1.5. Cursor com for implicito
+**Cursor com for implicito**
 
 ```sql
 BEGIN
@@ -779,7 +756,7 @@ BEGIN
 END;
 ```
 
-###### 1.1.3.3.1.6. cursor implicito
+**Cursor implicito**
 
 ```sql
   BEGIN
@@ -791,36 +768,29 @@ END;
   END;
 ```
 
-#### 1.1.3.4. Propriedades de transação (ACID)
+---
 
-> O que é uma transação?
->
+### Propriedades de transação (ACID)
+
+O que é uma transação?
 > Uma transação é uma sequência de operações executadas como uma única unidade lógica de trabalho.
 
-- ACID é um conceito que se refere às quatro propriedades de transação de um sistema de banco de dados: Atomicidade, Consistência, Isolamento e Durabilidade.
+ACID é um conceito que se refere às quatro propriedades de transação de um sistema de banco de dados: Atomicidade, Consistência, Isolamento e Durabilidade.
 - **Atomicidade**: As transações são, geralmente, compostas de várias declarações (comandos / operações). A atomicidade é uma propriedade que garante que cada transação seja tratada como uma entidade única, a qual deve ser executada por completo ou falhar completamente. Desta forma, todas as operações da transação devem ser executadas com sucesso para que a transação tenha sucesso. Se uma única operação que seja do bloco da transação falhar, toda a transação deverá ser cancelada – as transações são aplicadas de uma forma “tudo ou nada”. Caso haja falha em qualquer operação da transação, o banco de dados será retornado ao estado anterior ao início da transação. Chamamos a esse retorno de estado de Rollback (“transação desfeita”). Caso a transação tenha sucesso, o BD é alterado de forma permanente, em um processo denominado Commit (“efetivação”)
 - **Consistência**: A propriedade da consistência permite assegurar que uma transação somente leve o banco de dados de um estado válido a outro, mantendo a estabilidade do banco. Os dados que são gravados devem sempre ser válidos, de acordo com regras definidas, e isso inclui qualquer operação considerada, como triggers, constraints (restrições), procedimentos armazenados, ou outras que determinem a validade dos dados inseridos. Desta forma, é evitada a corrupção do banco de dados que pode ser causada por uma transação ilegal. Por exemplo, se for feita uma tentativa de inserir um registro em uma tabela de vendas da venda de um produto que não esteja presente em uma tabela de produtos, a transação falhará.
 - **Isolamento**: É muito comum que transações sejam executadas de forma concorrente, ou seja, de forma que várias tabelas sejam lidas ou alteradas por vários usuários simultaneamente. Com a propriedade do isolamento a execução concorrente permite deixar o banco de dados no mesmo estado em que ele estaria caso as transações fossem executadas em sequência. Por exemplo, imagine dois clientes tentando comprar o último exemplar de um produto em estoque, simultaneamente. O primeiro a finalizar a compra fará com que a transação do outro seja interrompida, sofrendo rollback.
 - **Durabilidade**: A propriedade da durabilidade garante que uma transação, uma vez executada (efetivada), permanecerá neste estado mesmo que haja um problema grave no sistema, como travamento de sistema ou falta de energia elétrica no servidor. Para isso, as transações finalizadas são gravadas em dispositivos de memória permanente (não-volátil), como discos rígidos, de modo que os dados estejam sempre disponíveis, mesmo que a instância do BD seja reiniciada.
 
-#### 1.1.3.5. Joins
+---
 
-<div align="center">
+### Joins
 
-<img width="75%" height="75%" src="https://fabiobmed.com.br/wp-content/uploads/2013/04/sqljoins2.png">
+![Tipos de joins](https://upload.wikimedia.org/wikipedia/commons/c/c9/Joins_del_SQL.svg)
 
-</div>
-
-- **Inner join**:
-  - Uma Junção Interna é caracterizada por uma seleção que retorna apenas os dados que atendem às condições de junção, isto é, quais linhas de uma tabela se relacionam com as linhas de outras tabelas. Para isto utilizamos a cláusula ON, que é semelhante à cláusula WHERE. Podemos especificar duas formas diferentes de expressar esta junção: a explícita utiliza a palavra JOIN, enquanto a implícita utiliza ',' para separar as tabelas a combinar na cláusula FROM do SELECT. Então sempre é gerado o produto cruzado do qual são selecionadas as combinações que cumpram a cláusula WHERE.
-- **Outer join**
-  - Left Outer Join: O resultado desta seleção sempre contém todos os registros da tabela esquerda (isto é, a primeira tabela mencionada na consulta), mesmo quando não exista registros correspondentes na tabela direita. Desta forma, esta seleção retorna todos os valores da tabela esquerda com os valores da tabela direita correspondente, ou quando não há correspondência retorna um valor NULL.
-  - Right Outer Join: Esta operação apresenta todos os dados das tabelas à esquerda e à direita, mesmo que não possuam correspondência em outra tabela. A tabela combinada possuirá assim todos os registros de ambas as tabelas e apresentará valores nulos para os registros sem correspondência.
-- **Self join**
-  - Bem, um SELF JOIN nada mais é que um JOIN na mesma tabela, relacionando colunas diferentes claro. Então é necessário que a tabela tenha pelo menos duas colunas, onda faremos uma coluna se relacionar com a outra. Isto acontece poucas vezes na prática, mas é muito bom com dados hierárquicos, onde podemos fazer uma árvore genealógica, ou como no exemplo mais abaixo podemos relacionar um empregado com o seu gerente que também é um empregado e existe na mesma tabela.
-- **Cross Join**
-  - Quando queremos juntar duas ou mais tabelas por cruzamento.
-- **Natural join**
-  - Cria um INNER ou OUTTER join entre as duas tabelas, sem definição EXPLICITA do critério de junção, pois, automaticamente, se utiliza dos campos que as duas tabelas tem em comum para criar a junçao (Utiliza as chaves estrangeiras que interligam as duas tabelas).
-- **Theta e equi join**
-  - Muitos consideram ambos EQUI JOIN e Theta JOIN semelhantes a INNER, OUTER etc JOINs. Mas eu acredito fortemente que é um erro e faz o ideias vagas. Porque INNER JOIN, OUTER JOIN etc estão todos conectados com as tabelas e seus dados, enquanto EQUI JOIN e THETA JOIN são apenas conectado com os operadores que usamos no primeiro.
+- **Inner join**: Uma Junção Interna é caracterizada por uma seleção que retorna apenas os dados que atendem às condições de junção, isto é, quais linhas de uma tabela se relacionam com as linhas de outras tabelas. Para isto utilizamos a cláusula ON, que é semelhante à cláusula WHERE. Podemos especificar duas formas diferentes de expressar esta junção: a explícita utiliza a palavra JOIN, enquanto a implícita utiliza ',' para separar as tabelas a combinar na cláusula FROM do SELECT. Então sempre é gerado o produto cruzado do qual são selecionadas as combinações que cumpram a cláusula WHERE.
+- **Outer join** Left Outer Join: O resultado desta seleção sempre contém todos os registros da tabela esquerda (isto é, a primeira tabela mencionada na consulta), mesmo quando não exista registros correspondentes na tabela direita. Desta forma, esta seleção retorna todos os valores da tabela esquerda com os valores da tabela direita correspondente, ou quando não há correspondência retorna um valor NULL.
+- **Right Outer Join**: Esta operação apresenta todos os dados das tabelas à esquerda e à direita, mesmo que não possuam correspondência em outra tabela. A tabela combinada possuirá assim todos os registros de ambas as tabelas e apresentará valores nulos para os registros sem correspondência.
+- **Self join**: Bem, um SELF JOIN nada mais é que um JOIN na mesma tabela, relacionando colunas diferentes claro. Então é necessário que a tabela tenha pelo menos duas colunas, onda faremos uma coluna se relacionar com a outra. Isto acontece poucas vezes na prática, mas é muito bom com dados hierárquicos, onde podemos fazer uma árvore genealógica, ou como no exemplo mais abaixo podemos relacionar um empregado com o seu gerente que também é um empregado e existe na mesma tabela.
+- **Cross Join**: Quando queremos juntar duas ou mais tabelas por cruzamento.
+- **Natural join**: Cria um INNER ou OUTTER join entre as duas tabelas, sem definição EXPLICITA do critério de junção, pois, automaticamente, se utiliza dos campos que as duas tabelas tem em comum para criar a junçao (Utiliza as chaves estrangeiras que interligam as duas tabelas).
+- **Theta e equi join**: Muitos consideram ambos EQUI JOIN e Theta JOIN semelhantes a INNER, OUTER etc JOINs. Mas eu acredito fortemente que é um erro e faz o ideias vagas. Porque INNER JOIN, OUTER JOIN etc estão todos conectados com as tabelas e seus dados, enquanto EQUI JOIN e THETA JOIN são apenas conectado com os operadores que usamos no primeiro.
