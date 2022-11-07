@@ -770,7 +770,7 @@ END;
 
 ---
 
-### Propriedades de transação (ACID)
+## Propriedades de transação (ACID)
 
 O que é uma transação?
 > Uma transação é uma sequência de operações executadas como uma única unidade lógica de trabalho.
@@ -783,7 +783,7 @@ ACID é um conceito que se refere às quatro propriedades de transação de um s
 
 ---
 
-### Joins
+## Joins
 
 ![Tipos de joins](https://upload.wikimedia.org/wikipedia/commons/c/c9/Joins_del_SQL.svg)
 
