@@ -326,7 +326,6 @@ BEGIN
   || To_char(valor));
 END;
 ```
----
 
 ## Funções agregadas
 
@@ -375,7 +374,6 @@ FROM   embarq a
 WHERE  b.corpeca = 'Cinza'
 GROUP  BY codfornec;
 ```
---- 
 
 ## Functions, Procedures e Cursores
 
@@ -768,8 +766,6 @@ END;
   END;
 ```
 
----
-
 ## Propriedades de transação (ACID)
 
 O que é uma transação?
@@ -780,8 +776,6 @@ ACID é um conceito que se refere às quatro propriedades de transação de um s
 - **Consistência**: A propriedade da consistência permite assegurar que uma transação somente leve o banco de dados de um estado válido a outro, mantendo a estabilidade do banco. Os dados que são gravados devem sempre ser válidos, de acordo com regras definidas, e isso inclui qualquer operação considerada, como triggers, constraints (restrições), procedimentos armazenados, ou outras que determinem a validade dos dados inseridos. Desta forma, é evitada a corrupção do banco de dados que pode ser causada por uma transação ilegal. Por exemplo, se for feita uma tentativa de inserir um registro em uma tabela de vendas da venda de um produto que não esteja presente em uma tabela de produtos, a transação falhará.
 - **Isolamento**: É muito comum que transações sejam executadas de forma concorrente, ou seja, de forma que várias tabelas sejam lidas ou alteradas por vários usuários simultaneamente. Com a propriedade do isolamento a execução concorrente permite deixar o banco de dados no mesmo estado em que ele estaria caso as transações fossem executadas em sequência. Por exemplo, imagine dois clientes tentando comprar o último exemplar de um produto em estoque, simultaneamente. O primeiro a finalizar a compra fará com que a transação do outro seja interrompida, sofrendo rollback.
 - **Durabilidade**: A propriedade da durabilidade garante que uma transação, uma vez executada (efetivada), permanecerá neste estado mesmo que haja um problema grave no sistema, como travamento de sistema ou falta de energia elétrica no servidor. Para isso, as transações finalizadas são gravadas em dispositivos de memória permanente (não-volátil), como discos rígidos, de modo que os dados estejam sempre disponíveis, mesmo que a instância do BD seja reiniciada.
-
----
 
 ## Joins
 
